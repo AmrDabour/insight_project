@@ -1,4 +1,5 @@
 # Insight Project - Git Ignore File
+# Modified to allow essential models and files for cloud deployment
 
 # Python
 __pycache__/
@@ -32,12 +33,15 @@ env/
 .ENV/
 .env
 
-# Environment variables
+# Environment variables (keep .env files out but allow .env.example)
 .env
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
+# Allow example env files
+!.env.example
+!.env.sample
 
 # IDE and editor files
 .vscode/
@@ -48,32 +52,48 @@ env/
 .DS_Store
 Thumbs.db
 
-# Logs
+# Logs (but allow log directories)
 *.log
-logs/
-*.log.*
+logs/*.log
+logs/*.log.*
+# Allow empty log directories
+!logs/.gitkeep
 
-# Temporary files
-temp/
-tmp/
+# Temporary files content (but allow directories)
+temp/*
+tmp/*
 *.tmp
 *.temp
+# Allow temp directories to exist
+!temp/.gitkeep
+!tmp/.gitkeep
 
-# Upload directories
-uploads/
-upload/
+# Upload content (but allow directories)
+uploads/*
+upload/*
+# Allow upload directories to exist
+!uploads/.gitkeep
+!upload/.gitkeep
 
-# Model files (too large for git)
-*.pt
+# Allow essential model files for cloud deployment
+# YOLO models are needed for form_reader service
+!app/models/boxes.pt
+!app/models/dot_line.pt
+# But ignore other large model files
 *.pth
 *.onnx
 *.h5
 *.pkl
-*.model
+# Allow small model config files
+!*.json
+!*.yaml
+!*.yml
+!*.txt
 
-# Document cache
-*.cache
-.cache/
+# Document cache content (but allow cache directories)
+.cache/*
+# Allow cache directories
+!.cache/.gitkeep
 
 # Database files
 *.db
@@ -88,9 +108,6 @@ upload/
 .Trashes
 ehthumbs.db
 Thumbs.db
-
-# Docker
-.dockerignore
 
 # Coverage reports
 htmlcov/
@@ -147,7 +164,7 @@ dmypy.json
 # FastAPI
 .fastapi/
 
-# Local development
+# Local development files
 local_*
 dev_*
 test_*
@@ -156,8 +173,73 @@ test_*
 *.bak
 *.backup
 
-# Archive files
+# Archive files (but allow essential ones)
 *.zip
 *.tar.gz
 *.rar
-*.7z 
+*.7z
+
+# Allow essential directories even if empty
+!app/
+!app/models/
+!app/services/
+!app/services/form_reader/
+!app/services/money_reader/
+!app/services/ppt_pdf_reader/
+!app/utils/
+!test/
+
+# User uploaded files (content, not directories)
+uploads/*.pptx
+uploads/*.ppt  
+uploads/*.pdf
+uploads/*.png
+uploads/*.jpg
+uploads/*.jpeg
+
+# Generated audio files (content, not directories)
+temp/*.wav
+temp/*.mp3
+temp/*.mp4
+
+# Sensitive configuration (but allow templates)
+config/production.py
+config/secrets.py
+# Allow config templates
+!config/*.template
+!config/*.example
+
+# Docker build cache
+.dockerignore
+
+# Allow essential startup scripts
+!start.sh
+!start.ps1
+!*.sh
+!*.ps1
+
+# Allow all Python files in the project
+!app/**/*.py
+!test/**/*.py
+
+# Allow configuration files
+!*.yaml
+!*.yml
+!*.json
+!*.toml
+!requirements.txt
+!Dockerfile
+!render.yaml
+!README.md
+
+# Allow license and documentation
+!LICENSE
+!LICENSE.*
+!*.md
+!*.rst
+!docs/
+
+# Ignore personal notes and temporary docs
+notes.txt
+todo.txt
+personal_* 
