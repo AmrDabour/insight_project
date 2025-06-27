@@ -1,0 +1,40 @@
+# Insight Project - Combined Requirements
+# FastAPI and web framework
+fastapi
+uvicorn
+python-multipart
+
+# Image processing and computer vision
+pillow
+numpy
+opencv-python-headless
+
+# AI and machine learning
+google-generativeai
+ultralytics
+
+# Document processing
+PyMuPDF
+spire.presentation
+
+# OCR and text processing
+pytesseract
+arabic-reshaper
+python-bidi
+langdetect
+word2number
+
+# Configuration and utilities
+python-dotenv
+pydantic
+pydantic-settings
+requests
+
+# UI and testing
+streamlit
+
+# Audio processing  
+wave
+
+# Development and debugging
+python-speech-recognition 

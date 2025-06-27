@@ -1,0 +1,36 @@
+services:
+  - type: web
+    name: insight-project-api
+    runtime: docker
+    plan: starter
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    envVars:
+      - key: GOOGLE_AI_API_KEY
+        value: AIzaSyABJCFK7ylhc6yd0v5qH-2HpCZlZrjoF-Q
+      - key: PORT
+        value: "8000"
+      - key: HOST  
+        value: "0.0.0.0"
+      - key: DEBUG
+        value: "false"
+      - key: LOG_LEVEL
+        value: INFO
+      - key: FORM_READER_ENABLED
+        value: "true"
+      - key: MONEY_READER_ENABLED
+        value: "true"
+      - key: PPT_PDF_READER_ENABLED
+        value: "true"
+      - key: TTS_ENABLED
+        value: "true"
+      - key: MAX_FILE_SIZE
+        value: "52428800"
+      - key: SESSION_TIMEOUT
+        value: "3600"
+      - key: MAX_SESSIONS
+        value: "1000"
+    healthCheckPath: /health
+    autoDeploy: true
+    buildCommand: pip install -r requirements.txt
+    startCommand: python -m uvicorn app.main:app --host 0.0.0.0 --port $PORT 
